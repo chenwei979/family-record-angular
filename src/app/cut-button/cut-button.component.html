@@ -1,3 +1,5 @@
-<p>
-  cut-button works!
-</p>
+<div id="cutButton">
+  <div class='icon cut_red' (click)="onClick()"></div>
+  <span class="cutText">{{buttonTitle}}</span>
+  <input  type="text" name="buttonTitle"  [(ngModel)]="buttonTitle"/>
+</div>

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 
 @Component({
   selector: 'app-cut-button',
@@ -6,10 +6,16 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./cut-button.component.css']
 })
 export class CutButtonComponent implements OnInit {
+  buttonTitle: string;
 
-  constructor() { }
+  constructor() {
+    this.buttonTitle = 'Custom cut button';
+  }
 
   ngOnInit() {
   }
 
+  onClick() {
+    alert('This is cut button.');
+  }
 }
