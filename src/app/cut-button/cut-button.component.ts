@@ -1,4 +1,6 @@
 import {Component, OnInit} from '@angular/core';
+import {Store} from '@ngrx/store';
+import {CHANGE_FONT_SIZE} from '../redux/actions/canvas';
 
 @Component({
   selector: 'app-cut-button',
@@ -8,7 +10,7 @@ import {Component, OnInit} from '@angular/core';
 export class CutButtonComponent implements OnInit {
   buttonTitle: string;
 
-  constructor() {
+  constructor(private store: Store<CanvasSettings>) {
     this.buttonTitle = 'Custom cut button';
   }
 
@@ -16,6 +18,9 @@ export class CutButtonComponent implements OnInit {
   }
 
   onClick() {
-    alert('This is cut button.');
+    this.store.dispatch({
+      type: CHANGE_FONT_SIZE,
+      payload: 20
+    });
   }
 }

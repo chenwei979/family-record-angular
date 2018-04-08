@@ -1,5 +1,5 @@
-<div id="cutButton">
-  <div class='icon cut_red' (click)="onClick()"></div>
+<div id="cutButton" (click)="onClick()">
+  <div class='icon cut_red'></div>
   <span class="cutText">{{buttonTitle}}</span>
-  <input  type="text" name="buttonTitle"  [(ngModel)]="buttonTitle"/>
 </div>
+<input  type="text" name="buttonTitle"  [(ngModel)]="buttonTitle"/>
