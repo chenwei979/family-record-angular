@@ -10,10 +10,10 @@ import { RecordComponent } from '../record/record.component';
   styleUrls: ['./layout.component.css']
 })
 export class LayoutComponent implements AfterViewInit, AfterContentInit {
-  @ViewChild('solutionExplorerPanel', {read: ViewContainerRef})
+  @ViewChild('solutionExplorerPanel', { read: ViewContainerRef })
   solutionExplorerPanel: ViewContainerRef;
 
-  @ViewChild('dockingLayout', {read: ViewContainerRef})
+  @ViewChild('dockingLayout', { read: ViewContainerRef })
   dockingLayout: ViewContainerRef;
 
   constructor(private viewContainerRef: ViewContainerRef, private componentFactoryResolver: ComponentFactoryResolver) {
@@ -27,7 +27,7 @@ export class LayoutComponent implements AfterViewInit, AfterContentInit {
     this.solutionExplorerPanel.createComponent(recordComponentFactory);
     setTimeout(() => {
       this.init();
-    }, 2000);
+    }, 200);
   }
 
   init() {
@@ -36,26 +36,12 @@ export class LayoutComponent implements AfterViewInit, AfterContentInit {
       type: 'layoutGroup',
       orientation: 'horizontal',
       items: [{
-        type: 'autoHideGroup',
-        alignment: 'left',
-        width: '20%',
-        unpinnedWidth: '20%',
-        items: [{
-          type: 'layoutPanel',
-          title: 'Toolbox',
-          contentContainer: 'ToolboxPanel'
-        }, {
-          type: 'layoutPanel',
-          title: 'Help',
-          contentContainer: 'HelpPanel'
-        }]
-      }, {
         type: 'layoutGroup',
         orientation: 'vertical',
-        width: '50%',
+        width: '100%',
         items: [{
           type: 'documentGroup',
-          height: '50%',
+          height: '100%',
           minHeight: 200,
           items: [{
             type: 'documentPanel',
@@ -63,49 +49,12 @@ export class LayoutComponent implements AfterViewInit, AfterContentInit {
             contentContainer: 'Document1Panel',
             initContent: function () {
             }
-          }, {
-            type: 'documentPanel',
-            title: 'New Document',
-            contentContainer: 'Document2Panel',
-            initContent: function () {
-            }
           }]
-        }, {
-          type: 'tabbedGroup',
-          height: '50%',
-          minHeight: 200,
-          pinnedHeight: 30,
-          items: [{
-            type: 'layoutPanel',
-            title: 'Error List',
-            contentContainer: 'ErrorListPanel'
-          }, {
-            type: 'layoutPanel',
-            title: 'Performance',
-            contentContainer: 'PerformancePanel',
-            selected: true,
-            initContent: function () {
-            }
-          }]
-        }]
-      }, {
-        type: 'tabbedGroup',
-        width: '30%',
-        minWidth: 200,
-        items: [{
-          type: 'layoutPanel',
-          title: 'Solution Explorer',
-          contentContainer: 'SolutionExplorerPanel',
-          initContent: () => {
-          }
-        }, {
-          type: 'layoutPanel',
-          title: 'Properties',
-          contentContainer: 'PropertiesPanel'
         }]
       }]
     }];
 
-    $(this.dockingLayout.element.nativeElement).jqxDockingLayout({width: '100%', height: '100%', layout: layout, contextMenu: false});
+    const ele = $(this.dockingLayout.element.nativeElement);
+    ele.jqxDockingLayout({ width: '100%', height: '100%', layout: layout, contextMenu: false });
   }
 }
