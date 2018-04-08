@@ -1,13 +1,15 @@
-import { BrowserModule } from '@angular/platform-browser';
-import { FormsModule } from '@angular/forms';
-import { NgModule } from '@angular/core';
+import {BrowserModule} from '@angular/platform-browser';
+import {FormsModule} from '@angular/forms';
+import {NgModule} from '@angular/core';
 
-import { AppComponent } from './app.component';
-import { RecordComponent } from './record/record.component';
-import { LayoutComponent } from './layout/layout.component';
-import { RibbonComponent } from './ribbon/ribbon.component';
-import { CutButtonComponent } from './cut-button/cut-button.component';
+import {AppComponent} from './app.component';
+import {RecordComponent} from './record/record.component';
+import {LayoutComponent} from './layout/layout.component';
+import {RibbonComponent} from './ribbon/ribbon.component';
+import {CutButtonComponent} from './cut-button/cut-button.component';
 
+import {StoreModule} from '@ngrx/store';
+import {canvasReducer} from './redux/reducers/canvas';
 
 @NgModule({
   declarations: [
@@ -22,7 +24,10 @@ import { CutButtonComponent } from './cut-button/cut-button.component';
   ],
   imports: [
     BrowserModule,
-    FormsModule
+    FormsModule,
+    StoreModule.forRoot({
+      canvasSettings: canvasReducer,
+    })
   ],
   providers: [],
   bootstrap: [AppComponent]
