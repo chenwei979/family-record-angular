@@ -1,6 +1,8 @@
 import {
-  Component, OnInit, AfterViewInit, AfterContentInit, ViewChild, ViewContainerRef,
-  ComponentFactoryResolver
+  Component, NgZone, OnInit, AfterViewInit, AfterContentInit, ViewChild, ViewContainerRef,
+  ComponentFactoryResolver,
+  Injector,
+  ApplicationRef
 } from '@angular/core';
 import { RecordComponent } from '../record/record.component';
 
@@ -10,24 +12,17 @@ import { RecordComponent } from '../record/record.component';
   styleUrls: ['./layout.component.css']
 })
 export class LayoutComponent implements AfterViewInit, AfterContentInit {
-  @ViewChild('solutionExplorerPanel', { read: ViewContainerRef })
-  solutionExplorerPanel: ViewContainerRef;
 
-  @ViewChild('dockingLayout', { read: ViewContainerRef })
-  dockingLayout: ViewContainerRef;
-
-  constructor(private viewContainerRef: ViewContainerRef, private componentFactoryResolver: ComponentFactoryResolver) {
+  constructor(private injector: Injector
+    , private app: ApplicationRef
+    , private componentFactoryResolver: ComponentFactoryResolver) {
   }
 
   ngAfterViewInit() {
   }
 
   ngAfterContentInit(): void {
-    const recordComponentFactory = this.componentFactoryResolver.resolveComponentFactory(RecordComponent);
-    this.solutionExplorerPanel.createComponent(recordComponentFactory);
-    setTimeout(() => {
-      this.init();
-    }, 200);
+    this.init();
   }
 
   init() {
@@ -47,14 +42,13 @@ export class LayoutComponent implements AfterViewInit, AfterContentInit {
             type: 'documentPanel',
             title: 'index.htm',
             contentContainer: 'Document1Panel',
-            initContent: function () {
+            initContent: () => {
             }
           }]
         }]
       }]
     }];
 
-    const ele = $(this.dockingLayout.element.nativeElement);
-    ele.jqxDockingLayout({ width: '100%', height: '100%', layout: layout, contextMenu: false });
+    $(document.getElementById('dockingLayout')).jqxDockingLayout({ width: '100%', height: '100%', layout: layout, contextMenu: false });
   }
 }

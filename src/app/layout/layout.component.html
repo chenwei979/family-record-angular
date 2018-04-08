@@ -1,4 +1,4 @@
-<div #dockingLayout id="dockingLayout">
+<div id="dockingLayout">
   <!--autoHideGroup-->
   <div data-container="ToolboxPanel">
     List of tools</div>
@@ -6,7 +6,6 @@
     Help topics</div>
   <!--documentGroup-->
   <div data-container="Document1Panel">
-    <ng-container #solutionExplorerPanel></ng-container>
   </div>
   <div data-container="Document2Panel">
     Document 2 content</div>
@@ -15,6 +14,8 @@
     List of errors</div>
   <!--right tabbedGroup-->
   <div data-container="SolutionExplorerPanel">
+    <div id="solutionExplorerPanel">
+    </div>
   </div>
   <div data-container="PropertiesPanel">
     List of properties</div>
