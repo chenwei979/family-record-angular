@@ -1,7 +1,9 @@
 import {
-  Component, OnInit, AfterViewInit, AfterContentInit, ComponentFactoryResolver, Injector, ApplicationRef
+  Component, OnInit, AfterViewInit, AfterContentInit, ComponentFactoryResolver, Injector, ApplicationRef, enableProdMode
 } from '@angular/core';
 import {RecordComponent} from '../record/record.component';
+
+enableProdMode();
 
 @Component({
   selector: 'app-layout',
@@ -15,13 +17,14 @@ export class LayoutComponent implements OnInit, AfterViewInit, AfterContentInit 
     , private componentFactoryResolver: ComponentFactoryResolver) {
   }
 
-  ngOnInit() {}
+  ngOnInit() {
+  }
 
   ngAfterViewInit() {
+    this.init();
   }
 
   ngAfterContentInit(): void {
-    this.init();
   }
 
   init() {
@@ -104,7 +107,7 @@ export class LayoutComponent implements OnInit, AfterViewInit, AfterContentInit 
       }]
     }];
 
-    $(document.getElementById('dockingLayout')).jqxDockingLayout({
+    $('#dockingLayout').jqxDockingLayout({
       width: '100%',
       height: '100%',
       layout: layout,
