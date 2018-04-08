@@ -91,9 +91,9 @@ export class LayoutComponent implements OnInit, AfterViewInit, AfterContentInit 
           title: 'Solution Explorer',
           contentContainer: 'SolutionExplorerPanel',
           initContent: () => {
-            const recordComponentFactory = this.componentFactoryResolver.resolveComponentFactory(RecordComponent);
             const container = document.getElementById('solutionExplorerPanel');
-            const ref = recordComponentFactory.create(this.injector, [], container);
+            const componentFactory = this.componentFactoryResolver.resolveComponentFactory(RecordComponent);
+            const ref = componentFactory.create(this.injector, [], container);
             this.app.attachView(ref.hostView);
           }
         }, {
