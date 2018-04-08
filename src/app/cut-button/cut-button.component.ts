@@ -9,18 +9,22 @@ import {CHANGE_FONT_SIZE} from '../redux/actions/canvas';
 })
 export class CutButtonComponent implements OnInit {
   buttonTitle: string;
+  fontSize: number;
 
   constructor(private store: Store<CanvasSettings>) {
     this.buttonTitle = 'Custom cut button';
+    this.fontSize = 16;
   }
 
   ngOnInit() {
   }
 
+
   onClick() {
+    this.fontSize = this.fontSize + 2;
     this.store.dispatch({
       type: CHANGE_FONT_SIZE,
-      payload: 20
+      payload: this.fontSize
     });
   }
 }
