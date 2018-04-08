@@ -11,9 +11,20 @@ import {CHANGE_FONT_SIZE} from '../redux/actions/canvas';
 export class RecordComponent implements OnInit {
   settings: Observable<CanvasSettings>;
   message: string;
+  myStyle: any;
 
   constructor(private store: Store<CanvasSettings>) {
+    this.myStyle = {
+      fontSize: '16px'
+    };
+
     this.settings = store.pipe(select('canvasSettings'));
+    this.settings.subscribe(item => {
+      this.myStyle = {
+        ...this.myStyle,
+        fontSize: item.fontSize + 'px'
+      };
+    });
     this.message = 'Bruce Chen';
   }
 
