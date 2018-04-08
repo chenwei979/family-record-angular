@@ -1,4 +1,5 @@
 <p>
-  <input  type="text" name="message"  [(ngModel)]="message"/>
+  <input type="text" name="message" [(ngModel)]="message"/>
   <span (click)="onClick()">{{message}}</span>
+  <span>{{settings | async | json}}</span>
 </p>
