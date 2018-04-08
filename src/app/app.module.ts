@@ -5,13 +5,15 @@ import { NgModule } from '@angular/core';
 import { AppComponent } from './app.component';
 import { RecordComponent } from './record/record.component';
 import { LayoutComponent } from './layout/layout.component';
+import { RibbonComponent } from './ribbon/ribbon.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
     RecordComponent,
-    LayoutComponent
+    LayoutComponent,
+    RibbonComponent
   ],
   entryComponents: [
     RecordComponent
