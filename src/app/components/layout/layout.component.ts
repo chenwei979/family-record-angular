@@ -1,7 +1,7 @@
 import {
   Component, OnInit, AfterViewInit, AfterContentInit, ComponentFactoryResolver, Injector, ApplicationRef, enableProdMode
 } from '@angular/core';
-import {RecordComponent} from '../record/record.component';
+import { RecordComponent } from '../record/record.component';
 
 enableProdMode();
 

@@ -1,5 +1,5 @@
-import {Reducer, Action} from '@ngrx/store';
-import {CHANGE_FONT_FAMILY, CHANGE_FONT_SIZE} from '../actions/canvas';
+import { Reducer, Action } from '@ngrx/store';
+import { CHANGE_FONT_FAMILY, CHANGE_FONT_SIZE } from '../actions/canvas';
 
 
 const defaultSettings: CanvasSettings = {
