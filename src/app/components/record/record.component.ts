@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Store, select } from '@ngrx/store';
 import { Observable } from 'rxjs/Observable';
+import { AppState, selectCanvasSettingsFontSize } from '../../redux/app-state';
 
 @Component({
   selector: 'app-record',
@@ -8,20 +9,16 @@ import { Observable } from 'rxjs/Observable';
   styleUrls: ['./record.component.css']
 })
 export class RecordComponent implements OnInit {
-  settings: Observable<CanvasSettings>;
+  fontSize: Observable<number>;
+  customStyle: any;
   message: string;
-  myStyle: any;
 
-  constructor(private store: Store<CanvasSettings>) {
-    this.myStyle = {
-      fontSize: '16px'
-    };
-
-    this.settings = store.pipe(select('canvasSettings'));
-    this.settings.subscribe(item => {
-      this.myStyle = {
-        ...this.myStyle,
-        fontSize: item.fontSize + 'px'
+  constructor(private store: Store<AppState>) {
+    this.fontSize = store.pipe(select(selectCanvasSettingsFontSize));
+    this.fontSize.subscribe(fontSize => {
+      this.customStyle = {
+        ...this.customStyle,
+        fontSize: fontSize + 'px'
       };
     });
     this.message = 'Bruce Chen';

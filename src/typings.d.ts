@@ -6,9 +6,3 @@ interface NodeModule {
 }
 
 declare var $: any;
-
-
-declare interface CanvasSettings {
-  fontSize: number;
-  fontFamily: string;
-}

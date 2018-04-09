@@ -1,4 +1,5 @@
 import { CanvasSettingActionTypes, CanvasSettingActionsUnion } from '../actions/canvas';
+import { CanvasSettings } from '../app-state';
 
 
 const defaultSettings: CanvasSettings = {
