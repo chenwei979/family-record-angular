@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { select, Store } from '@ngrx/store';
-import { CHANGE_FONT_SIZE } from '../../redux/actions/canvas';
+import { ChangeFontSize } from '../../redux/actions/canvas';
 
 @Component({
   selector: 'app-cut-button',
@@ -25,9 +25,6 @@ export class CutButtonComponent implements OnInit {
 
 
   onClick() {
-    this.store.dispatch({
-      type: CHANGE_FONT_SIZE,
-      payload: this.fontSize + 2
-    });
+    this.store.dispatch(new ChangeFontSize(this.fontSize + 2));
   }
 }

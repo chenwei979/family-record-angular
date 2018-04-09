@@ -182,7 +182,7 @@ export class RibbonComponent implements OnInit, AfterViewInit {
               dropDownWidth: '110px',
               autoDropDownHeight: true,
               renderer: function (index, label, value) {
-                const imgUrl = pasteData[index].imgUrl;
+                // const imgUrl = pasteData[index].imgUrl;
                 const labelEl = '<span style="font-size: 10px">' + label + '</span>';
                 const icon = '<span class="' + pasteData[index].imageClass + '" style=""></span>';
                 return '<span>' + icon + labelEl + '</span>';

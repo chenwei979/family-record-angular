@@ -1,5 +1,4 @@
-import { Reducer, Action } from '@ngrx/store';
-import { CHANGE_FONT_FAMILY, CHANGE_FONT_SIZE } from '../actions/canvas';
+import { CanvasSettingActionTypes, CanvasSettingActionsUnion } from '../actions/canvas';
 
 
 const defaultSettings: CanvasSettings = {
@@ -7,17 +6,17 @@ const defaultSettings: CanvasSettings = {
   fontFamily: ''
 };
 
-export const canvasReducer = (state: CanvasSettings = defaultSettings, action: Action) => {
+export const canvasReducer = (state: CanvasSettings = defaultSettings, action: CanvasSettingActionsUnion) => {
   switch (action.type) {
-    case CHANGE_FONT_SIZE:
+    case CanvasSettingActionTypes.CHANGE_FONT_SIZE:
       return {
         ...state,
-        fontSize: action.payload
+        fontSize: action.fontSize
       };
-    case CHANGE_FONT_FAMILY:
+    case CanvasSettingActionTypes.CHANGE_FONT_FAMILY:
       return {
         ...state,
-        fontFamily: action.payload
+        fontFamily: action.fontFamily
       };
     default:
       return state;

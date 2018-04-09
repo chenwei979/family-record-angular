@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Store, select } from '@ngrx/store';
 import { Observable } from 'rxjs/Observable';
-import { CHANGE_FONT_SIZE } from '../../redux/actions/canvas';
 
 @Component({
   selector: 'app-record',
@@ -29,10 +28,6 @@ export class RecordComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.store.dispatch({
-      type: CHANGE_FONT_SIZE,
-      payload: 18
-    });
   }
 
   onClick() {
