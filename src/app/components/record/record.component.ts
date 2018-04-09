@@ -9,19 +9,19 @@ import { AppState, selectCanvasSettingsFontSize } from '../../redux/app-state';
   styleUrls: ['./record.component.css']
 })
 export class RecordComponent implements OnInit {
+  message: string;
   fontSize: Observable<number>;
   customStyle: any;
-  message: string;
 
   constructor(private store: Store<AppState>) {
+    this.message = 'Bruce Chen';
     this.fontSize = store.pipe(select(selectCanvasSettingsFontSize));
-    this.fontSize.subscribe(fontSize => {
+    this.fontSize.subscribe(value => {
       this.customStyle = {
         ...this.customStyle,
-        fontSize: fontSize + 'px'
+        fontSize: value + 'px'
       };
     });
-    this.message = 'Bruce Chen';
   }
 
   ngOnInit() {

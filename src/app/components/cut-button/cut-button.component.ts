@@ -16,12 +16,9 @@ export class CutButtonComponent implements OnInit {
 
   constructor(private store: Store<AppState>) {
     this.buttonTitle = 'Add font size';
-    this.fontSizeValue = 16;
-
-
     this.fontSize = store.pipe(select(selectCanvasSettingsFontSize));
-    this.fontSize.subscribe(fontSize => {
-      this.fontSizeValue = fontSize;
+    this.fontSize.subscribe(value => {
+      this.fontSizeValue = value;
     });
   }
 
