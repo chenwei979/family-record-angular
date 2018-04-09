@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { select, Store } from '@ngrx/store';
 import { ChangeFontSize } from '../../redux/actions/canvas';
-import { AppState } from '../../redux/app-state';
+import { AppState, selectCanvasSettingsFontSize } from '../../redux/app-state';
+import { Observable } from 'rxjs/Observable';
 
 @Component({
   selector: 'app-cut-button',
@@ -10,15 +11,17 @@ import { AppState } from '../../redux/app-state';
 })
 export class CutButtonComponent implements OnInit {
   buttonTitle: string;
-  fontSize: number;
+  fontSize: Observable<number>;
+  fontSizeValue: number;
 
   constructor(private store: Store<AppState>) {
     this.buttonTitle = 'Add font size';
-    this.fontSize = 16;
+    this.fontSizeValue = 16;
 
-    const settings = store.pipe(select('canvasSettings'));
-    settings.subscribe(item => {
-      this.fontSize = item.fontSize;
+
+    this.fontSize = store.pipe(select(selectCanvasSettingsFontSize));
+    this.fontSize.subscribe(fontSize => {
+      this.fontSizeValue = fontSize;
     });
   }
 
@@ -27,6 +30,6 @@ export class CutButtonComponent implements OnInit {
 
 
   onClick() {
-    this.store.dispatch(new ChangeFontSize(this.fontSize + 2));
+    this.store.dispatch(new ChangeFontSize(this.fontSizeValue + 2));
   }
 }
