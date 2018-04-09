@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { select, Store } from '@ngrx/store';
-import { CHANGE_FONT_SIZE } from '../redux/actions/canvas';
+import { CHANGE_FONT_SIZE } from '../../redux/actions/canvas';
 
 @Component({
   selector: 'app-cut-button',
