@@ -52,7 +52,7 @@ export class LayoutComponent implements OnInit, AfterViewInit, AfterContentInit 
         width: '50%',
         items: [{
           type: 'documentGroup',
-          height: '50%',
+          height: '100%',
           minHeight: 200,
           items: [{
             type: 'documentPanel',
@@ -64,23 +64,6 @@ export class LayoutComponent implements OnInit, AfterViewInit, AfterContentInit 
             type: 'documentPanel',
             title: 'New Document',
             contentContainer: 'Document2Panel',
-            initContent: function () {
-            }
-          }]
-        }, {
-          type: 'tabbedGroup',
-          height: '50%',
-          minHeight: 200,
-          pinnedHeight: 30,
-          items: [{
-            type: 'layoutPanel',
-            title: 'Error List',
-            contentContainer: 'ErrorListPanel'
-          }, {
-            type: 'layoutPanel',
-            title: 'Performance',
-            contentContainer: 'PerformancePanel',
-            selected: true,
             initContent: function () {
             }
           }]
