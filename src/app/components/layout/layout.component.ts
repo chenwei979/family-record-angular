@@ -44,8 +44,7 @@ export class LayoutComponent implements OnInit, AfterViewInit, AfterContentInit 
 
     const designerLayout = {
       type: 'layoutGroup',
-      orientation: 'vertical',
-      width: '50%',
+      width: '60%',
       items: [{
         type: 'documentGroup',
         height: '100%',
@@ -67,21 +66,21 @@ export class LayoutComponent implements OnInit, AfterViewInit, AfterContentInit 
 
     const propertyLayout = {
       type: 'tabbedGroup',
-      width: '30%',
+      width: '20%',
       items: [{
         type: 'layoutPanel',
-        title: 'Solution Explorer',
-        contentContainer: 'SolutionExplorerPanel',
+        title: 'Properties',
+        contentContainer: 'PropertiesPanel',
         initContent: () => {
-          const container = document.getElementById('solutionExplorerPanel');
+          const container = document.getElementById('propertiesPanel');
           const componentFactory = this.componentFactoryResolver.resolveComponentFactory(RecordComponent);
           const ref = componentFactory.create(this.injector, [], container);
           this.app.attachView(ref.hostView);
         }
       }, {
         type: 'layoutPanel',
-        title: 'Properties',
-        contentContainer: 'PropertiesPanel'
+        title: 'Tools',
+        contentContainer: 'ToolsPanel'
       }]
     };
 
