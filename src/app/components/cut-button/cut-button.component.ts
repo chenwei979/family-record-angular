@@ -30,3 +30,41 @@ export class CutButtonComponent implements OnInit {
     this.store.dispatch(new ChangeFontSize(this.fontSizeValue + 2));
   }
 }
+
+// class Variable {
+//   Id: string;
+//   Title: string;
+//   Type: number;
+//   DeviceId: string;
+//   TagId: string;
+//   Observable: any;
+//
+//   public constructor(id: string, title: string, type: number, deviceId: string, tagId: string) {
+//     this.Id = id;
+//     this.Title = title;
+//     this.Type = type;
+//     this.DeviceId = deviceId;
+//     this.TagId = tagId;
+//
+//     //es6 generator
+//     this.Observable = Rx.Observable.create((observer) => {
+//       var callBackList = [];
+//       callBackList.push((message: { driveId: string, tag: string, value: any }) => {
+//         if (this.filter(message))
+//           this.broadcast(message.value);
+//       });
+//     });
+//   }
+//
+//   broadcast(value) {
+//     observer(value);
+//   }
+//
+//   filter(message: { driveId: string, tag: string, value: any }) {
+//     return message.driveId === this.DeviceId && message.tag === this.TagId;
+//   }
+//
+//   subscribe(callBack) {
+//     return this.Observable.subscribe(callBack);
+//   }
+// }
