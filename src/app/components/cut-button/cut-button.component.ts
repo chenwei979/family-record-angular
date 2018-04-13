@@ -3,6 +3,7 @@ import { select, Store } from '@ngrx/store';
 import { ChangeFontSize } from '../../redux/actions/canvas';
 import { AppState, selectCanvasSettingsFontSize } from '../../redux/app-state';
 import { Observable } from 'rxjs/Observable';
+import { Subject } from 'rxjs/Subject';
 
 @Component({
   selector: 'app-cut-button',
@@ -31,40 +32,43 @@ export class CutButtonComponent implements OnInit {
   }
 }
 
+interface Message {
+  driveId: string;
+  tag: string;
+  value: any;
+}
+
 class Variable {
   Id: string;
   Title: string;
   Type: number;
   DeviceId: string;
   TagId: string;
-  Observable: any;
+  Subject: Subject;
+  LiveDataSubject: Subject;
 
-  public constructor(id: string, title: string, type: number, deviceId: string, tagId: string) {
+  public constructor(id: string, title: string, type: number, deviceId: string, tagId: string, liveDataSubject: Subject) {
     this.Id = id;
     this.Title = title;
     this.Type = type;
     this.DeviceId = deviceId;
     this.TagId = tagId;
+    this.LiveDataSubject = liveDataSubject;
+    this.Subject = new Subject();
 
     //es6 generator
-    this.Observable = Rx.Observable.create((observer) => {
-      var callBackList = [];
-      callBackList.push((message: { driveId: string, tag: string, value: any }) => {
-        if (this.filter(message))
-          this.broadcast(observer, message.value);
-      });
+    liveDataObservable.subscribe((message: Message) => {
+      if (this.filter(message)) {
+        this.Subject.next(message.value);
+      }
     });
   }
 
-  broadcast(observer, value) {
-    observer(value);
-  }
-
-  filter(message: { driveId: string, tag: string, value: any }) {
+  filter(message: Message) {
     return message.driveId === this.DeviceId && message.tag === this.TagId;
   }
 
   subscribe(callBack) {
-    return this.Observable.subscribe(callBack);
+    return this.Subject.subscribe(callBack);
   }
 }
