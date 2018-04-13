@@ -24,6 +24,19 @@ export class CutButtonComponent implements OnInit {
   }
 
   ngOnInit() {
+    const liveDataSubject = new Subject();
+    var v = new Variable('id', 'title', 'string', 'deviceId', 'tagId', liveDataSubject);
+    liveDataSubject.next({
+      driveId: 'deviceId',
+      tagId: 'tagId',
+      value: '1',
+    });
+    v.subscribe((val) => console.log(val));
+    liveDataSubject.next({
+      driveId: 'deviceId',
+      tagId: 'tagId',
+      value: '2',
+    });
   }
 
 
@@ -34,18 +47,18 @@ export class CutButtonComponent implements OnInit {
 
 interface Message {
   driveId: string;
-  tag: string;
+  tagId: string;
   value: any;
 }
 
 class Variable {
-  Id: string;
-  Title: string;
-  Type: number;
-  DeviceId: string;
-  TagId: string;
-  Subject: Subject;
-  LiveDataSubject: Subject;
+  private Id: string;
+  private Title: string;
+  private Type: number;
+  private DeviceId: string;
+  private TagId: string;
+  private Subject: Subject;
+  private LiveDataSubject: Subject;
 
   public constructor(id: string, title: string, type: number, deviceId: string, tagId: string, liveDataSubject: Subject) {
     this.Id = id;
@@ -57,18 +70,18 @@ class Variable {
     this.Subject = new Subject();
 
     //es6 generator
-    liveDataObservable.subscribe((message: Message) => {
+    this.LiveDataSubject.subscribe((message: Message) => {
       if (this.filter(message)) {
         this.Subject.next(message.value);
       }
     });
   }
 
-  filter(message: Message) {
-    return message.driveId === this.DeviceId && message.tag === this.TagId;
+  private filter(message: Message) {
+    return message.driveId === this.DeviceId && message.tagId === this.TagId;
   }
 
-  subscribe(callBack) {
+  public subscribe(callBack) {
     return this.Subject.subscribe(callBack);
   }
 }
