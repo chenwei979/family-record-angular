@@ -25,7 +25,7 @@ export class CutButtonComponent implements OnInit {
 
   ngOnInit() {
     const liveDataSubject = new Subject();
-    var v = new Variable('id', 'title', 'string', 'deviceId', 'tagId', liveDataSubject);
+    var v = new Variable('id', 'title', 1, 'deviceId', 'tagId', liveDataSubject);
     liveDataSubject.next({
       driveId: 'deviceId',
       tagId: 'tagId',
@@ -57,22 +57,22 @@ class Variable {
   private Type: number;
   private DeviceId: string;
   private TagId: string;
-  private Subject: Subject;
-  private LiveDataSubject: Subject;
+  private InternalSubject: Subject<any>;
+  private LiveDataSubject: Subject<any>;
 
-  public constructor(id: string, title: string, type: number, deviceId: string, tagId: string, liveDataSubject: Subject) {
+  public constructor(id: string, title: string, type: number, deviceId: string, tagId: string, liveDataSubject: Subject<any>) {
     this.Id = id;
     this.Title = title;
     this.Type = type;
     this.DeviceId = deviceId;
     this.TagId = tagId;
     this.LiveDataSubject = liveDataSubject;
-    this.Subject = new Subject();
+    this.InternalSubject = new Subject();
 
     //es6 generator
     this.LiveDataSubject.subscribe((message: Message) => {
       if (this.filter(message)) {
-        this.Subject.next(message.value);
+        this.InternalSubject.next(message.value);
       }
     });
   }
@@ -82,6 +82,6 @@ class Variable {
   }
 
   public subscribe(callBack) {
-    return this.Subject.subscribe(callBack);
+    return this.InternalSubject.subscribe(callBack);
   }
 }
