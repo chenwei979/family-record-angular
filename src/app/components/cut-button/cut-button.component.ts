@@ -4,6 +4,7 @@ import { ChangeFontSize } from '../../redux/actions/canvas';
 import { AppState, selectCanvasSettingsFontSize } from '../../redux/app-state';
 import { Observable } from 'rxjs/Observable';
 import { Subject } from 'rxjs/Subject';
+import 'rxjs/add/operator/filter';
 
 @Component({
   selector: 'app-cut-button',
@@ -70,14 +71,12 @@ class Variable {
     this.InternalSubject = new Subject();
 
     //es6 generator
-    this.LiveDataSubject.subscribe((message: Message) => {
-      if (this.filter(message)) {
-        this.InternalSubject.next(message.value);
-      }
+    this.LiveDataSubject.filter(this.filter.bind(this)).subscribe((message: Message) => {
+      this.InternalSubject.next(message.value);
     });
   }
 
-  private filter(message: Message) {
+  protected filter(message: Message) {
     return message.driveId === this.DeviceId && message.tagId === this.TagId;
   }
 
